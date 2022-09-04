@@ -1,37 +1,43 @@
 using System.Collections;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace Lab1;
 
-public class TraceResult
+public struct TraceResult
 {
     private string? name;
     private String className;
     private int time;
-    private List<MethodBase> _arrayList;
+    [JsonPropertyName("methods")]
+    private List<TraceResult> _methods;
 
+    [JsonPropertyName("name")]
     public string? Name
     {
         get => name;
         set => name = value ?? throw new ArgumentNullException(nameof(value));
     }
-
+    
+    [JsonPropertyName("class")]
     public string ClassName
     {
         get => className;
         set => className = value ?? throw new ArgumentNullException(nameof(value));
     }
 
+    [JsonPropertyName("time")]
     public int Time
     {
         get => time;
         set => time = value;
     }
 
-    public List<MethodBase> ArrayList
+    [JsonPropertyName("methods")]
+    public List<TraceResult> Methods
     {
-        get => _arrayList;
-        set => _arrayList = value ?? throw new ArgumentNullException(nameof(value));
+        get => _methods;
+        set => _methods = value ?? throw new ArgumentNullException(nameof(value));
     }
 }

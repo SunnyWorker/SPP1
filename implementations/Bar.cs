@@ -2,22 +2,19 @@ using Lab1.interfaces;
 
 namespace Lab1.implementations;
 
-public class TestClass
+public class Bar
 {
     private ITracer _tracer;
-    private Bar bar;
 
-    public TestClass(ITracer tracer)
+    public Bar(ITracer tracer)
     {
         _tracer = tracer;
-        bar = new Bar(tracer);
     }
 
-    public void DoSomething()
+    public void InnerMethod()
     {
         _tracer.StartTrace();
-        bar.InnerMethod();
-        Thread.Sleep(2000);
+        Thread.Sleep(105);
         _tracer.StopTrace();
     }
 }
