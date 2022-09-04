@@ -7,6 +7,10 @@ public class TestClass
     private ITracer _tracer;
     private Bar bar;
 
+    public TestClass()
+    {
+    }
+
     public TestClass(ITracer tracer)
     {
         _tracer = tracer;

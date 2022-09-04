@@ -14,6 +14,7 @@ public class Bar
     public void InnerMethod(int milliseconds)
     {
         _tracer.StartTrace();
+        Console.WriteLine("InnerMethod of Bar invoked!");
         Thread.Sleep(milliseconds);
         _tracer.StopTrace();
     }

@@ -10,13 +10,13 @@ public class Tracer : ITracer
 
     public void StartTrace()
     {
-        TraceResult _traceResult = new TraceResult();
+        TraceResultMethods _traceResult = new TraceResultMethods();
         Stopwatch _stopwatch = new Stopwatch();
         _traceResult.Name = new StackTrace().GetFrame(1)?.GetMethod()?.Name;
         _traceResult.ClassName = new StackTrace().GetFrame(1)?.GetMethod()?.ReflectedType.Name;
-        _traceResult.Methods = new List<TraceResult>();
+        _traceResult.Methods = new List<TraceResultMethods>();
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
-        List<TraceResult> traceResults = Program.threads.threads[threadIndex].Methods;
+        List<TraceResultMethods> traceResults = Program.threads.Methods[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
@@ -62,9 +62,9 @@ public class Tracer : ITracer
         
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
         
-        List<TraceResult> traceResults = Program.threads.threads[threadIndex].Methods;
+        List<TraceResultMethods> traceResults = Program.threads.Methods[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
-        if (stackTrace.FrameCount == 3) Program.threads.threads[threadIndex].TimeInt += _traceResult.TimeInt;
+        if (stackTrace.FrameCount == 3) Program.threads.Methods[threadIndex].TimeInt += _traceResult.TimeInt;
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
             String methodName = stackTrace.GetFrame(i).GetMethod().Name;
@@ -79,7 +79,7 @@ public class Tracer : ITracer
             }
         
         }
-        TraceResult helpTraceResult = traceResults[^1];
+        TraceResultMethods helpTraceResult = traceResults[^1];
         helpTraceResult.TimeInt = _traceResult.TimeInt;
         traceResults[^1] = helpTraceResult;
 

@@ -1,12 +1,16 @@
 ﻿
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Xml;
+using System.Xml.Serialization;
 using Lab1;
-using Lab1.entities;
 using Lab1.implementations;
+using Lab1.interfaces;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 
 class Program
@@ -22,10 +26,10 @@ class Program
         Tracer tracer = new Tracer();
         TestClass testClass = new TestClass(tracer);
         Thread thread = new Thread(testClass.DoSomething);
-        ThreadWrapper threadWrapper = new ThreadWrapper(thread,1);
-        threads.threads.Add(threadWrapper);
-        threads.threads[0].Thread.Start();
-        threads.threads[0].Thread.Join();
-        Console.WriteLine(JsonValue.Parse(JsonSerializer.Serialize(threads)));
+        TraceResultThread traceResultThread = new TraceResultThread(thread,1);
+        threads.Methods.Add(traceResultThread);
+        threads.Methods[0].Thread.Start();
+        threads.Methods[0].Thread.Join();
+        TraceResult traceResult = threads;
     }
 }
