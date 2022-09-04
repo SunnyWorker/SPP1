@@ -27,6 +27,5 @@ class Program
         threads.threads[0].Thread.Start();
         threads.threads[0].Thread.Join();
         Console.WriteLine(JsonValue.Parse(JsonSerializer.Serialize(threads)));
-        Console.WriteLine(threads.threads[0].Thread.Name);
     }
 }

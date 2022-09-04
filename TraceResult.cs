@@ -9,7 +9,8 @@ public struct TraceResult
 {
     private string? name;
     private String className;
-    private int time;
+    [field: NonSerialized]
+    public int TimeInt;
     [JsonPropertyName("methods")]
     private List<TraceResult> _methods;
 
@@ -28,10 +29,9 @@ public struct TraceResult
     }
 
     [JsonPropertyName("time")]
-    public int Time
+    public string Time
     {
-        get => time;
-        set => time = value;
+        get => String.Format("{0}ms",TimeInt);
     }
 
     [JsonPropertyName("methods")]

@@ -16,8 +16,9 @@ public class TestClass
     public void DoSomething()
     {
         _tracer.StartTrace();
-        bar.InnerMethod();
+        bar.InnerMethod(200);
         Thread.Sleep(2000);
+        bar.InnerMethod(700);
         _tracer.StopTrace();
     }
 }

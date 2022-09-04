@@ -11,10 +11,10 @@ public class Bar
         _tracer = tracer;
     }
 
-    public void InnerMethod()
+    public void InnerMethod(int milliseconds)
     {
         _tracer.StartTrace();
-        Thread.Sleep(105);
+        Thread.Sleep(milliseconds);
         _tracer.StopTrace();
     }
 }

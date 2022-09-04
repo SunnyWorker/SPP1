@@ -5,16 +5,16 @@ namespace Lab1.implementations;
 
 public class Tracer : ITracer
 {
-    private Stopwatch _stopwatch;
-    private TraceResult _traceResult;
-    
+    private Dictionary<Thread, Stack<Stopwatch>> _dictionaryStopwatch;
+    private Dictionary<Thread, Stack<TraceResult>> _dictionaryTraceResult;
+
     public void StartTrace()
     {
+        TraceResult _traceResult = new TraceResult();
+        Stopwatch _stopwatch = new Stopwatch();
         _traceResult.Name = new StackTrace().GetFrame(1)?.GetMethod()?.Name;
         _traceResult.ClassName = new StackTrace().GetFrame(1)?.GetMethod()?.ReflectedType.Name;
         _traceResult.Methods = new List<TraceResult>();
-        Console.WriteLine(_traceResult.Name);
-        Console.WriteLine(_traceResult.ClassName);
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
         List<TraceResult> traceResults = Program.threads.threads[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
@@ -33,27 +33,38 @@ public class Tracer : ITracer
         
         }
         
-        traceResults.Add(GetTraceResult());
-        
+        traceResults.Add(_traceResult);
+        if (!_dictionaryTraceResult.ContainsKey(Thread.CurrentThread))
+        {
+            _dictionaryTraceResult.Add(Thread.CurrentThread, new Stack<TraceResult>());
+        }
+        if (!_dictionaryStopwatch.ContainsKey(Thread.CurrentThread))
+        {
+            _dictionaryStopwatch.Add(Thread.CurrentThread, new Stack<Stopwatch>());
+        }
+        _dictionaryTraceResult[Thread.CurrentThread].Push(_traceResult);
+        _dictionaryStopwatch[Thread.CurrentThread].Push(_stopwatch);
         _stopwatch.Start();
     }
 
     public Tracer()
     {
-        _stopwatch = new Stopwatch();
-        _traceResult = new TraceResult();
+        _dictionaryStopwatch = new Dictionary<Thread, Stack<Stopwatch>>();
+        _dictionaryTraceResult = new Dictionary<Thread, Stack<TraceResult>>();
     }
 
     public void StopTrace()
     {
+        Stopwatch _stopwatch = _dictionaryStopwatch[Thread.CurrentThread].Pop();
         _stopwatch.Stop();
-        _traceResult.Time = (int)_stopwatch.Elapsed.TotalMilliseconds;
+        TraceResult _traceResult = GetTraceResult();
+        _traceResult.TimeInt = (int)_stopwatch.Elapsed.TotalMilliseconds;
         
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
         
         List<TraceResult> traceResults = Program.threads.threads[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
-        if (stackTrace.FrameCount == 3) Program.threads.threads[threadIndex].TimeInt += _traceResult.Time;
+        if (stackTrace.FrameCount == 3) Program.threads.threads[threadIndex].TimeInt += _traceResult.TimeInt;
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
             String methodName = stackTrace.GetFrame(i).GetMethod().Name;
@@ -69,13 +80,13 @@ public class Tracer : ITracer
         
         }
         TraceResult helpTraceResult = traceResults[^1];
-        helpTraceResult.Time = _traceResult.Time;
+        helpTraceResult.TimeInt = _traceResult.TimeInt;
         traceResults[^1] = helpTraceResult;
 
     }
 
     public TraceResult GetTraceResult()
     {
-        return _traceResult;
+        return _dictionaryTraceResult[Thread.CurrentThread].Pop();
     }
 }
