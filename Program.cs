@@ -13,7 +13,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 
-class Program
+public class Program
 {
     public static Threads threads
     {
@@ -30,6 +30,14 @@ class Program
         threads.Methods.Add(traceResultThread);
         threads.Methods[0].Thread.Start();
         threads.Methods[0].Thread.Join();
-        TraceResult traceResult = threads;
+        String converterName = "JSON";
+        Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Serialization\\{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
+        TraceResultSerializer traceResultSerializer = null;
+        Type type = assembly.GetType($"{converterName}.{converterName}Converter");
+        traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);
+        Stream stream = Console.OpenStandardOutput();
+        traceResultSerializer.Serialize(threads,stream);
+        
+        
     }
 }

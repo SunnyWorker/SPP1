@@ -64,7 +64,7 @@ public class Tracer : ITracer
         
         List<TraceResultMethods> traceResults = Program.threads.Methods[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
-        if (stackTrace.FrameCount == 3) Program.threads.Methods[threadIndex].TimeInt += _traceResult.TimeInt;
+        if (Program.threads.Methods[threadIndex].Methods.Contains(_traceResult)) Program.threads.Methods[threadIndex].TimeInt += _traceResult.TimeInt;
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
             String methodName = stackTrace.GetFrame(i).GetMethod().Name;
