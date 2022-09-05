@@ -41,7 +41,8 @@ public class UnitTest1
         _threads.Methods[0].Thread.Start();
         _threads.Methods[0].Thread.Join();
         String converterName = "YAML";
-        Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Serialization\\{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
+        Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Lab1\\Serialization\\" +
+                                              $"{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
         TraceResultSerializer traceResultSerializer = null;
         Type type = assembly.GetType($"{converterName}.{converterName}Converter");
         traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);

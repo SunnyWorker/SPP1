@@ -13,14 +13,17 @@
 
     <ItemGroup>
       <Compile Remove="Core.Tests\**" />
+      <Compile Remove="Serialization\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Core.Tests\**" />
+      <EmbeddedResource Remove="Serialization\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Core.Tests\**" />
+      <None Remove="Serialization\**" />
     </ItemGroup>
 
 </Project>
