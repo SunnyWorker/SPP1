@@ -1,29 +1,20 @@
-﻿
-using System.Diagnostics;
+﻿using Core;
+using Core.implementations;
+using Core.interfaces;
+
+namespace Example;
+
 using System.Reflection;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Xml;
-using System.Xml.Serialization;
-using Lab1;
-using Lab1.implementations;
-using Lab1.interfaces;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 
 public class Program
 {
-    public static Threads threads
-    {
-        get;
-        set;
-    } 
+    
     static void Main(string[] args)
     {
-        threads = new Threads();
         Tracer tracer = new Tracer();
+        Threads threads = new Threads();
+        ThreadsHolder.threads = threads;
         TestClass testClass = new TestClass(tracer);
         Thread thread = new Thread(testClass.DoSomething);
         Thread thread2 = new Thread(testClass.DoSomething);

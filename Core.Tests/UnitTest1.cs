@@ -1,7 +1,7 @@
 using System.Reflection;
-using Lab1;
-using Lab1.implementations;
-using Lab1.interfaces;
+using Core.implementations;
+using Core.interfaces;
+
 
 namespace Core.Tests;
 
@@ -14,8 +14,9 @@ public class UnitTest1
     public void Initialization()
     {
         _threads = new Threads();
-        Program.threads = _threads;
         _tracer = new Tracer();
+        ThreadsHolder.threads = _threads;
+
 
     }
     

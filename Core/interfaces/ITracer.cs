@@ -1,4 +1,4 @@
-namespace Lab1.interfaces;
+namespace Core.interfaces;
 
 public interface ITracer 
 {

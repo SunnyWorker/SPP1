@@ -2,11 +2,11 @@ using System.Collections;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
-using Lab1.interfaces;
+using Core.interfaces;
 using Microsoft.VisualBasic.CompilerServices;
 using YamlDotNet.Serialization;
 
-namespace Lab1;
+namespace Core;
 
 public class TraceResultMethods : TraceResult
 {

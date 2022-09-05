@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
-using Lab1.implementations;
+using Core.implementations;
 using YamlDotNet.Serialization;
 
-namespace Lab1.interfaces;
+namespace Core.interfaces;
 
 [XmlInclude(typeof(TraceResultThread)), XmlInclude(typeof(TraceResultMethods)), XmlInclude(typeof(Threads))]
 [XmlRoot("root")]

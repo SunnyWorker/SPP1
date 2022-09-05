@@ -1,10 +1,10 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
-using Lab1.interfaces;
+using Core.interfaces;
 using YamlDotNet.Serialization;
 
-namespace Lab1.implementations;
+namespace Core.implementations;
 
 public class TraceResultThread : TraceResult
 {

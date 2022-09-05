@@ -14,16 +14,19 @@
     <ItemGroup>
       <Compile Remove="Core.Tests\**" />
       <Compile Remove="Serialization\**" />
+      <Compile Remove="Example\**" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="Core.Tests\**" />
       <EmbeddedResource Remove="Serialization\**" />
+      <EmbeddedResource Remove="Example\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Core.Tests\**" />
       <None Remove="Serialization\**" />
+      <None Remove="Example\**" />
     </ItemGroup>
 
 </Project>

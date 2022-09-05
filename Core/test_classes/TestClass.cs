@@ -1,6 +1,6 @@
-using Lab1.interfaces;
+using Core.interfaces;
 
-namespace Lab1.implementations;
+namespace Core.implementations;
 
 public class TestClass
 {

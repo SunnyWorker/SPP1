@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
-using Lab1.implementations;
-using Lab1.interfaces;
+using Core.implementations;
+using Core.interfaces;
 using YamlDotNet.Serialization;
 
-namespace Lab1;
+namespace Core;
 
 [XmlInclude(typeof(TraceResultThread)), XmlInclude(typeof(TraceResultMethods))]
 [XmlRoot(ElementName = "root", Namespace = null)]
@@ -18,6 +18,8 @@ public class Threads : TraceResult
         get;
         set;
     }
+    
+    
 
 
     public Threads()

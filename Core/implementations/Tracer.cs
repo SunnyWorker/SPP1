@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using Lab1.interfaces;
+using Core.interfaces;
 
-namespace Lab1.implementations;
+namespace Core.implementations;
 
 public class Tracer : ITracer
 {
@@ -17,7 +17,7 @@ public class Tracer : ITracer
         _traceResult.ClassName = new StackTrace().GetFrame(1)?.GetMethod()?.ReflectedType.Name;
         _traceResult.Methods = new List<TraceResultMethods>();
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
-        List<TraceResultMethods> traceResults = Program.threads.Methods[threadIndex].Methods;
+        List<TraceResultMethods> traceResults = ThreadsHolder.threads.Methods[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
@@ -63,9 +63,10 @@ public class Tracer : ITracer
         
         int threadIndex = int.Parse(Thread.CurrentThread.Name)-1;
         
-        List<TraceResultMethods> traceResults = Program.threads.Methods[threadIndex].Methods;
+        List<TraceResultMethods> traceResults = ThreadsHolder.threads.Methods[threadIndex].Methods;
         StackTrace stackTrace = new StackTrace();
-        if (Program.threads.Methods[threadIndex].Methods.Contains(_traceResult)) Program.threads.Methods[threadIndex].TimeInt += _traceResult.TimeInt;
+        if (ThreadsHolder.threads.Methods[threadIndex].Methods.Contains(_traceResult)) 
+            ThreadsHolder.threads.Methods[threadIndex].TimeInt += _traceResult.TimeInt;
         for (int i = stackTrace.FrameCount-2; i > 1; i--)
         {
             String methodName = stackTrace.GetFrame(i).GetMethod().Name;
