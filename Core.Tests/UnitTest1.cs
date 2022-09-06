@@ -16,8 +16,6 @@ public class UnitTest1
         _threads = new Threads();
         _tracer = new Tracer();
         ThreadsHolder.threads = _threads;
-
-
     }
     
     [TestMethod]

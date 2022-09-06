@@ -26,17 +26,8 @@ public class TraceResult
     public virtual string? Time
     {
         get => $"{TimeInt}ms";
-        set => Time = value;
     }
     
 
-    [field: NonSerialized]
-    [XmlIgnore]
-    [JsonIgnore]
-    [YamlIgnore]
-    public Thread Thread
-    {
-        get;
-        set;
-    }
+
 }

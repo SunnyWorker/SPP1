@@ -32,8 +32,7 @@ public class Program
         TraceResultSerializer traceResultSerializer = null;
         Type type = assembly.GetType($"{converterName}.{converterName}Converter");
         traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);
-        Stream stream = Console.OpenStandardOutput();
-        traceResultSerializer.Serialize(threads,stream);
+        traceResultSerializer.Serialize(threads,Console.OpenStandardOutput());
         
         
     }

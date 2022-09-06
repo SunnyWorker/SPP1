@@ -31,7 +31,7 @@ public class Threads : TraceResult
     [XmlIgnore]
     [JsonIgnore]
     [YamlIgnore]
-    public override string? Time { get; set; }
+    public override string? Time { get;}
 
 
 }

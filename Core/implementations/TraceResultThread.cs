@@ -44,4 +44,14 @@ public class TraceResultThread : TraceResult
         get => Thread.Name;
         set => Id = value;
     }
+    
+    [field: NonSerialized]
+    [XmlIgnore]
+    [JsonIgnore]
+    [YamlIgnore]
+    public Thread Thread
+    {
+        get;
+        set;
+    }
 }
