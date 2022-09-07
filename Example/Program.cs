@@ -16,28 +16,22 @@ public class Program
         Tracer tracer = new Tracer();
         TestClass testClass = new TestClass(tracer);
         Thread thread;
+        PluginHolder pluginHolder = new PluginHolder();
         // for (int i = 1; i < 3; i++)
         // {
             thread = new Thread(testClass.DoSomething);
             ThreadInfo threadInfo = new ThreadInfo(tracer,thread,1);
             thread.Start();
         //}
-
+        
         foreach (var keyValuePair in tracer.ThreadInfoDictionary)
         {
             keyValuePair.Key.Join();
         }
-
+        
         TraceResult traceResult = tracer.GetTraceResult();
         traceResult = tracer.GetTraceResult();
-        String converterName = "JSON";
-        Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Lab1\\Serialization\\" +
-                                              $"{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
-        TraceResultSerializer traceResultSerializer = null;
-        Type type = assembly.GetType($"{converterName}.{converterName}Converter");
-        traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);
+        TraceResultSerializer traceResultSerializer = pluginHolder.GetPlugin("YAML");
         traceResultSerializer.Serialize(traceResult,Console.OpenStandardOutput());
-
-        
     }
 }
