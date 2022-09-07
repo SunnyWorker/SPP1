@@ -10,10 +10,4 @@
       <PackageReference Include="YamlDotNet" Version="12.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="Core">
-        <HintPath>..\..\Example\bin\Debug\net6.0\Core.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>

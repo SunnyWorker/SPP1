@@ -6,32 +6,22 @@ using YamlDotNet.Serialization;
 
 namespace Core;
 
-[XmlInclude(typeof(TraceResultThread)), XmlInclude(typeof(TraceResultMethods))]
+[XmlInclude(typeof(ThreadInfo)), XmlInclude(typeof(MethodInfo))]
 [XmlRoot(ElementName = "root", Namespace = null)]
-public class Threads : TraceResult
+public class TraceResult
 {
     [JsonPropertyName("threads")]
     [XmlElement("thread")]
     [YamlMember(Alias = "threads")]
-    public List<TraceResultThread> Methods
+    public IReadOnlyList<ThreadInfo> Threads
     {
         get;
         set;
     }
     
-    
-
-
-    public Threads()
+    public TraceResult(List<ThreadInfo> methodsList)
     {
-        Methods = new List<TraceResultThread>();
+        Threads = methodsList;
     }
-
-    [field: NonSerialized]
-    [XmlIgnore]
-    [JsonIgnore]
-    [YamlIgnore]
-    public override string? Time { get;}
-
 
 }
