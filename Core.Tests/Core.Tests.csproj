@@ -19,4 +19,19 @@
       <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Core">
+        <HintPath>..\Serialization\XML\bin\Debug\net6.0\Core.dll</HintPath>
+      </Reference>
+      <Reference Include="JSON">
+        <HintPath>..\Serialization\JSON\bin\Debug\net6.0\JSON.dll</HintPath>
+      </Reference>
+      <Reference Include="XML">
+        <HintPath>..\Serialization\XML\bin\Debug\net6.0\XML.dll</HintPath>
+      </Reference>
+      <Reference Include="YAML">
+        <HintPath>..\Serialization\YAML\bin\Debug\net6.0\YAML.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
