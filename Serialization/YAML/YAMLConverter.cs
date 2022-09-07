@@ -1,4 +1,6 @@
-﻿using Core.interfaces;
+﻿using Core;
+using Core.interfaces;
+using Wrappers;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -8,11 +10,13 @@ public class YAMLConverter : TraceResultSerializer
 {
     public void Serialize(TraceResult traceResult, Stream to)
     {
+        TraceResultWrapper traceResultWrapper = new TraceResultWrapper();
+        traceResultWrapper = traceResultWrapper.ConvertTraceResultToTraceResultWrapper(traceResult);
         var serializer = new SerializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
         TextWriter textWriter = new StreamWriter(to);
-        serializer.Serialize(textWriter,traceResult);
+        serializer.Serialize(textWriter,traceResultWrapper);
         textWriter.Flush();
         textWriter.Close();
     }

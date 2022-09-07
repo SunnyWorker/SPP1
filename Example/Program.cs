@@ -27,21 +27,17 @@ public class Program
         {
             keyValuePair.Key.Join();
         }
-        
-        // String converterName = "JSON";
-        // Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Lab1\\Serialization\\" +
-        //                                       $"{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
-        // TraceResultSerializer traceResultSerializer = null;
-        // Type type = assembly.GetType($"{converterName}.{converterName}Converter");
-        // traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);
-        // traceResultSerializer.Serialize(traceResult,Console.OpenStandardOutput());
-        
-        JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            
-        };
-        JsonSerializer.Serialize<object>(Console.OpenStandardOutput(),tracer.GetTraceResult(),options);
+
+        TraceResult traceResult = tracer.GetTraceResult();
+        traceResult = tracer.GetTraceResult();
+        String converterName = "JSON";
+        Assembly assembly = Assembly.LoadFrom($"D:\\Unik\\СПП\\Lab1\\Serialization\\" +
+                                              $"{converterName}\\bin\\Debug\\net6.0\\{converterName}.dll");
+        TraceResultSerializer traceResultSerializer = null;
+        Type type = assembly.GetType($"{converterName}.{converterName}Converter");
+        traceResultSerializer = (TraceResultSerializer)Activator.CreateInstance(type);
+        traceResultSerializer.Serialize(traceResult,Console.OpenStandardOutput());
+
         
     }
 }

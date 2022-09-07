@@ -50,7 +50,7 @@ public class Tracer : ITracer
         List<ThreadInfo> traceResultThreadList = new List<ThreadInfo>();
         foreach (var keyValuePair in ThreadInfoDictionary)
         {
-            traceResultThreadList.Add((ThreadInfo)keyValuePair.Value.Pop().Info);
+            traceResultThreadList.Add((ThreadInfo)keyValuePair.Value.Peek().Info);
         }
 
         TraceResult traceResult = new TraceResult(traceResultThreadList);
